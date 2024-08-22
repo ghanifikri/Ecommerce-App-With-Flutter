@@ -10,29 +10,23 @@ class MyFavortiesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         AppNavigator.push(context, const MyFavoritesPage());
       },
       child: Container(
         height: 70,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          color: AppColors.secondBackground,
-          borderRadius: BorderRadius.circular(10)
-        ),
+            color: AppColors.secondBackground,
+            borderRadius: BorderRadius.circular(10)),
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'My Favorites',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 16
-              ),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
             ),
-            Icon(
-              Icons.arrow_forward_ios_rounded
-            )
+            Icon(Icons.arrow_forward_ios_rounded)
           ],
         ),
       ),

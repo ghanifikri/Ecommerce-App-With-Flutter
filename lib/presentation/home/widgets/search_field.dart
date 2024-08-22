@@ -10,28 +10,23 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-       padding: const EdgeInsets.symmetric(
-         horizontal: 16
-       ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: TextField(
         readOnly: true,
-        onTap: (){
+        onTap: () {
           AppNavigator.push(context, const SearchPage());
         },
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(12),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50)
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50)
-          ),
-          prefixIcon: SvgPicture.asset(
-            AppVectors.search,
-            fit: BoxFit.none,
-          ),
-          hintText: 'search'
-        ),
+            contentPadding: const EdgeInsets.all(12),
+            focusedBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+            enabledBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+            prefixIcon: SvgPicture.asset(
+              AppVectors.search,
+              fit: BoxFit.none,
+            ),
+            hintText: 'search'),
       ),
     );
   }

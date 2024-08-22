@@ -11,16 +11,16 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: BasicAppbar(
-        title: Text(
-          'Settings'
-        ),
+        title: Text('Settings'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
             MyFavortiesTile(),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             MyOrdersTile()
           ],
         ),

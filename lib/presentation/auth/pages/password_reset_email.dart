@@ -15,37 +15,37 @@ class PasswordResetEmailPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _emailSending(),
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           _sentEmail(),
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           _returnToLoginButton(context)
         ],
       ),
     );
   }
+
   Widget _emailSending() {
     return Center(
-      child: SvgPicture.asset(
-        AppVectors.emailSending
-      ),
+      child: SvgPicture.asset(AppVectors.emailSending),
     );
   }
 
   Widget _sentEmail() {
     return const Center(
-      child: Text(
-        'We Sent you an Email to reset your password.'
-      ),
+      child: Text('We Sent you an Email to reset your password.'),
     );
   }
 
   Widget _returnToLoginButton(BuildContext context) {
     return BasicAppButton(
-      onPressed: (){
-        AppNavigator.pushReplacement(context, SigninPage());
-      },
-      width: 200,
-      title: 'Return to Login'
-    );
+        onPressed: () {
+          AppNavigator.pushReplacement(context, SigninPage());
+        },
+        width: 200,
+        title: 'Return to Login');
   }
 }

@@ -20,29 +20,33 @@ class ForgotPasswordPage extends StatelessWidget {
       appBar: const BasicAppbar(),
       body: BlocProvider(
         create: (context) => ButtonStateCubit(),
-        child:  BlocListener<ButtonStateCubit,ButtonState>(
-            listener: (context, state) {
-              if (state is ButtonFailureState){
-                var snackbar = SnackBar(content: Text(state.errorMessage),behavior: SnackBarBehavior.floating,);
-                ScaffoldMessenger.of(context).showSnackBar(snackbar);
-              }
+        child: BlocListener<ButtonStateCubit, ButtonState>(
+          listener: (context, state) {
+            if (state is ButtonFailureState) {
+              var snackbar = SnackBar(
+                content: Text(state.errorMessage),
+                behavior: SnackBarBehavior.floating,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            }
 
-              if (state is ButtonSuccessState) {
-                AppNavigator.push(context, const PasswordResetEmailPage());
-              }
-            },
+            if (state is ButtonSuccessState) {
+              AppNavigator.push(context, const PasswordResetEmailPage());
+            }
+          },
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 40
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _siginText(),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 _emailField(),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 _continueButton(),
               ],
             ),
@@ -55,35 +59,26 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget _siginText() {
     return const Text(
       'Forgot Password',
-      style: TextStyle(
-        fontSize: 32,
-        fontWeight: FontWeight.bold
-      ),
+      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
     );
   }
 
   Widget _emailField() {
     return TextField(
       controller: _emailCon,
-      decoration: const InputDecoration(
-        hintText: 'Enter Email'
-      ),
+      decoration: const InputDecoration(hintText: 'Enter Email'),
     );
   }
 
   Widget _continueButton() {
-    return Builder(
-      builder: (context) {
-        return BasicReactiveButton(
-          onPressed: (){
+    return Builder(builder: (context) {
+      return BasicReactiveButton(
+          onPressed: () {
             context.read<ButtonStateCubit>().execute(
-              usecase: SendPasswordResetEmailUseCase(),
-              params: _emailCon.text
-            );
+                usecase: SendPasswordResetEmailUseCase(),
+                params: _emailCon.text);
           },
-          title: 'Continue'
-        );
-      }
-    );
+          title: 'Continue');
+    });
   }
 }

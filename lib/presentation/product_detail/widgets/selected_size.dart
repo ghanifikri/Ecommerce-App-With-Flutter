@@ -9,22 +9,19 @@ import '../bloc/product_size_selection_cubit.dart';
 
 class SelectedSize extends StatelessWidget {
   final ProductEntity productEntity;
-  const SelectedSize({
-    required this.productEntity,
-    super.key
-    });
+  const SelectedSize({required this.productEntity, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         AppBottomsheet.display(
-          context,
-          BlocProvider.value(
-            value:BlocProvider.of<ProductSizeSelectionCubit>(context),
-            child: ProductSizes(productEntity: productEntity,)
-          )
-        );
+            context,
+            BlocProvider.value(
+                value: BlocProvider.of<ProductSizeSelectionCubit>(context),
+                child: ProductSizes(
+                  productEntity: productEntity,
+                )));
       },
       child: Container(
         height: 60,
@@ -39,23 +36,20 @@ class SelectedSize extends StatelessWidget {
           children: [
             const Text(
               'Size',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
             ),
             Row(
               children: [
-                  BlocBuilder<ProductSizeSelectionCubit,int>(
-                  builder: (context, state) =>  Text(
+                BlocBuilder<ProductSizeSelectionCubit, int>(
+                  builder: (context, state) => Text(
                     productEntity.sizes[state],
                     style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18
-                    ),
+                        fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 ),
-                const SizedBox(width: 15,),
+                const SizedBox(
+                  width: 15,
+                ),
                 const Icon(
                   Icons.keyboard_arrow_down,
                   size: 30,

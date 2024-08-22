@@ -16,35 +16,32 @@ class MyFavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppbar(
-        title: Text(
-          'My Favorites'
-        ),
+        title: Text('My Favorites'),
       ),
       body: BlocProvider(
-        create: (context) => ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>())..displayProducts(),
-        child: BlocBuilder<ProductsDisplayCubit,ProductsDisplayState>(
-          builder: (context, state) {
-            if (state is ProductsLoading){
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (state is ProductsLoaded) {
-              return _products(state.products);
-            }
+          create: (context) =>
+              ProductsDisplayCubit(useCase: sl<GetFavortiesProductsUseCase>())
+                ..displayProducts(),
+          child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
+            builder: (context, state) {
+              if (state is ProductsLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is ProductsLoaded) {
+                return _products(state.products);
+              }
 
-            if (state is LoadProductsFailure){
-              return const Center(
-                child: Text(
-                  'Please try again'
-                ),
-              );
-            }
+              if (state is LoadProductsFailure) {
+                return const Center(
+                  child: Text('Please try again'),
+                );
+              }
 
-            return Container();
-          },
-        )
-      ),
+              return Container();
+            },
+          )),
     );
   }
 
@@ -57,11 +54,10 @@ class MyFavoritesPage extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.6
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            return ProductCard(productEntity: products[index]);
-          },
+            childAspectRatio: 0.6),
+        itemBuilder: (BuildContext context, int index) {
+          return ProductCard(productEntity: products[index]);
+        },
       ),
     );
   }

@@ -14,21 +14,19 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SplashCubit,SplashState>(
+    return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
-        if(state is UnAuthenticated){
+        if (state is UnAuthenticated) {
           AppNavigator.pushReplacement(context, SigninPage());
         }
-        if(state is Authenticated) {
+        if (state is Authenticated) {
           AppNavigator.pushReplacement(context, const HomePage());
         }
       },
       child: Scaffold(
         backgroundColor: AppColors.primary,
         body: Center(
-          child: SvgPicture.asset(
-            AppVectors.appLogo
-          ),
+          child: SvgPicture.asset(AppVectors.appLogo),
         ),
       ),
     );

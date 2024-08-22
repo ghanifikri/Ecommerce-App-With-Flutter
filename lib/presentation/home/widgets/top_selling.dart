@@ -13,8 +13,10 @@ class TopSelling extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())..displayProducts(),
-      child: BlocBuilder < ProductsDisplayCubit, ProductsDisplayState > (
+      create: (context) =>
+          ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())
+            ..displayProducts(),
+      child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
             return const CircularProgressIndicator();
@@ -25,7 +27,9 @@ class TopSelling extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _topSelling(),
-                const SizedBox(height: 20, ),
+                const SizedBox(
+                  height: 20,
+                ),
                 _products(state.products)
               ],
             );
@@ -36,17 +40,14 @@ class TopSelling extends StatelessWidget {
     );
   }
 
-   Widget _topSelling() {
+  Widget _topSelling() {
     return const Padding(
       padding: EdgeInsets.symmetric(
-         horizontal: 16,
-       ),
+        horizontal: 16,
+      ),
       child: Text(
         'Top Selling',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16
-        ),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
     );
   }
@@ -55,19 +56,20 @@ class TopSelling extends StatelessWidget {
     return SizedBox(
       height: 300,
       child: ListView.separated(
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(
-         horizontal: 16,
-       ),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context,index) {
-          return ProductCard(
-            productEntity: products[index],
-          );
-        },
-        separatorBuilder: (context,index) => const SizedBox(width: 10,),
-        itemCount: products.length
-        ),
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return ProductCard(
+              productEntity: products[index],
+            );
+          },
+          separatorBuilder: (context, index) => const SizedBox(
+                width: 10,
+              ),
+          itemCount: products.length),
     );
   }
 }

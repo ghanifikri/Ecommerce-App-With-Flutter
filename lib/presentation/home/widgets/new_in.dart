@@ -9,15 +9,15 @@ import '../../../common/widgets/product/product_card.dart';
 import '../../../domain/product/entities/product.dart';
 import '../../../service_locator.dart';
 
-
 class NewIn extends StatelessWidget {
   const NewIn({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())..displayProducts(),
-      child: BlocBuilder < ProductsDisplayCubit, ProductsDisplayState > (
+      create: (context) => ProductsDisplayCubit(useCase: sl<GetNewInUseCase>())
+        ..displayProducts(),
+      child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
             return const CircularProgressIndicator();
@@ -28,7 +28,9 @@ class NewIn extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _newIn(),
-                const SizedBox(height: 20, ),
+                const SizedBox(
+                  height: 20,
+                ),
                 _products(state.products)
               ],
             );
@@ -39,39 +41,39 @@ class NewIn extends StatelessWidget {
     );
   }
 
-   Widget _newIn() {
+  Widget _newIn() {
     return const Padding(
       padding: EdgeInsets.symmetric(
-         horizontal: 16,
-       ),
+        horizontal: 16,
+      ),
       child: Text(
         'New In',
         style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-          color: AppColors.primary 
-        ),
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: AppColors.primary),
       ),
     );
   }
 
-   Widget _products(List<ProductEntity> products) {
+  Widget _products(List<ProductEntity> products) {
     return SizedBox(
       height: 300,
       child: ListView.separated(
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(
-         horizontal: 16,
-       ),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context,index) {
-          return ProductCard(
-            productEntity: products[index],
-          );
-        },
-        separatorBuilder: (context,index) => const SizedBox(width: 10,),
-        itemCount: products.length
-        ),
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return ProductCard(
+              productEntity: products[index],
+            );
+          },
+          separatorBuilder: (context, index) => const SizedBox(
+                width: 10,
+              ),
+          itemCount: products.length),
     );
   }
 }

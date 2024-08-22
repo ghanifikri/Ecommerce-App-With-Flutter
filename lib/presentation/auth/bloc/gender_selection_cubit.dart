@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GenderSelectionCubit extends Cubit<int> {
-  
-  GenderSelectionCubit() : super (1);
+  GenderSelectionCubit() : super(1);
 
   int selectedIndex = 1;
 
@@ -10,4 +9,4 @@ class GenderSelectionCubit extends Cubit<int> {
     selectedIndex = index;
     emit(index);
   }
-} 
+}

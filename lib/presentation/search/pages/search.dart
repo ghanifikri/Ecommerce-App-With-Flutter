@@ -18,19 +18,19 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsDisplayCubit(useCase: sl<GetProductsByTitleUseCase>()),
+      create: (context) =>
+          ProductsDisplayCubit(useCase: sl<GetProductsByTitleUseCase>()),
       child: Scaffold(
-        appBar: BasicAppbar(
-          height: 80,
-          title: SearchField()
-        ),
-        body: BlocBuilder<ProductsDisplayCubit,ProductsDisplayState>(
+        appBar: BasicAppbar(height: 80, title: SearchField()),
+        body: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
           builder: (context, state) {
-            if (state is ProductsLoading){
+            if (state is ProductsLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             if (state is ProductsLoaded) {
-              return state.products.isEmpty ? _notFound() : _products(state.products);
+              return state.products.isEmpty
+                  ? _notFound()
+                  : _products(state.products);
             }
             return Container();
           },
@@ -51,17 +51,14 @@ class SearchPage extends StatelessWidget {
           child: Text(
             "Sorry, we couldn't find any matching result for your Search.",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 20
-            ),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
           ),
         )
       ],
     );
   }
 
-   Widget _products(List<ProductEntity> products) {
+  Widget _products(List<ProductEntity> products) {
     return GridView.builder(
       itemCount: products.length,
       padding: const EdgeInsets.all(16),
@@ -69,11 +66,10 @@ class SearchPage extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          childAspectRatio: 0.6
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return ProductCard(productEntity: products[index]);
-        },
+          childAspectRatio: 0.6),
+      itemBuilder: (BuildContext context, int index) {
+        return ProductCard(productEntity: products[index]);
+      },
     );
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AgeSelectionCubit extends Cubit<String> {
-  
-  AgeSelectionCubit() : super ('Age Range');
+  AgeSelectionCubit() : super('Age Range');
 
   String selectedAge = '';
 
@@ -10,4 +9,4 @@ class AgeSelectionCubit extends Cubit<String> {
     selectedAge = age;
     emit(selectedAge);
   }
-} 
+}

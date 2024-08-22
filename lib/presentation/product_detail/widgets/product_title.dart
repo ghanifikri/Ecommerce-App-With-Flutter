@@ -4,10 +4,7 @@ import '../../../domain/product/entities/product.dart';
 
 class ProductTitle extends StatelessWidget {
   final ProductEntity productEntity;
-  const ProductTitle({
-    required this.productEntity,
-    super.key
-  });
+  const ProductTitle({required this.productEntity, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +12,7 @@ class ProductTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Text(
         productEntity.title,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16
-        ),
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
     );
   }

@@ -12,12 +12,10 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextField(
         controller: textEditingController,
-        onChanged: (value){
+        onChanged: (value) {
           if (value.isEmpty) {
             context.read<ProductsDisplayCubit>().displayInitial();
           } else {
@@ -25,19 +23,16 @@ class SearchField extends StatelessWidget {
           }
         },
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(12),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50)
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50)
-          ),
-          prefixIcon:  SvgPicture.asset(
+            contentPadding: const EdgeInsets.all(12),
+            focusedBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+            enabledBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+            prefixIcon: SvgPicture.asset(
               AppVectors.search,
               fit: BoxFit.none,
-          ),
-          hintText: 'search'
-        ),
+            ),
+            hintText: 'search'),
       ),
     );
   }

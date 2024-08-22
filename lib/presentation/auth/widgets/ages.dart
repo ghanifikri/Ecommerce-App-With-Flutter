@@ -12,56 +12,51 @@ class Ages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2.7,
-      child: BlocBuilder<AgesDisplayCubit,AgesDisplayState>(
-        builder: (context, state) {
-          if (state is AgesLoading) {
-            return Container(
-              alignment: Alignment.center,
-              child: const CircularProgressIndicator()
-            );
-          }
+        height: MediaQuery.of(context).size.height / 2.7,
+        child: BlocBuilder<AgesDisplayCubit, AgesDisplayState>(
+          builder: (context, state) {
+            if (state is AgesLoading) {
+              return Container(
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator());
+            }
 
-          if (state is AgesLoaded) {
-            return _ages(state.ages);
-          }
+            if (state is AgesLoaded) {
+              return _ages(state.ages);
+            }
 
-          if (state is AgesLoadFailure) {
-            return Container(
-              alignment: Alignment.center,
-              child: Text(
-                state.message
-              ),
-            );
-          }
+            if (state is AgesLoadFailure) {
+              return Container(
+                alignment: Alignment.center,
+                child: Text(state.message),
+              );
+            }
 
-          return const SizedBox();
-        },
-      )
-    );
+            return const SizedBox();
+          },
+        ));
   }
 
   Widget _ages(List<QueryDocumentSnapshot<Map<String, dynamic>>> ages) {
     return ListView.separated(
-      padding: const EdgeInsets.all(16),
-      itemBuilder: (context,index) {
-        return GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-            context.read<AgeSelectionCubit>().selectAge(
+        padding: const EdgeInsets.all(16),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+              context.read<AgeSelectionCubit>().selectAge(
+                    ages[index].data()['value'],
+                  );
+            },
+            child: Text(
               ages[index].data()['value'],
-            );
-          },
-          child: Text(
-            ages[index].data()['value'],
-            style: const TextStyle(
-              fontSize: 18
+              style: const TextStyle(fontSize: 18),
             ),
-          ),
-        );
-      },
-      separatorBuilder: (context,index) => const SizedBox(height: 20,),
-      itemCount: ages.length
-    );
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(
+              height: 20,
+            ),
+        itemCount: ages.length);
   }
 }

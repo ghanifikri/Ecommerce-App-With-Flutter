@@ -17,40 +17,36 @@ class OrderPlacedPage extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: Image.asset(
-              AppImages.orderPlaced
-            ) ,
+            child: Image.asset(AppImages.orderPlaced),
           ),
-          const SizedBox(height: 60,),
+          const SizedBox(
+            height: 60,
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               height: 300,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: const BoxDecoration(
-                color: AppColors.secondBackground,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20)
-                )
-              ),
+                  color: AppColors.secondBackground,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     'Order Placed Successfully',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   BasicAppButton(
-                    title: 'Finish',
-                    onPressed: (){
-                      AppNavigator.pushAndRemove(context, const HomePage());
-                    } 
-                  )
+                      title: 'Finish',
+                      onPressed: () {
+                        AppNavigator.pushAndRemove(context, const HomePage());
+                      })
                 ],
               ),
             ),

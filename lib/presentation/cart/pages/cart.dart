@@ -17,72 +17,67 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppbar(
-        title: Text(
-          'Cart'
-        ),
+        title: Text('Cart'),
       ),
       body: BlocProvider(
         create: (context) => CartProductsDisplayCubit()..displayCartProducts(),
-        child: BlocBuilder<CartProductsDisplayCubit,CartProductsDisplayState>(
+        child: BlocBuilder<CartProductsDisplayCubit, CartProductsDisplayState>(
           builder: (context, state) {
-            if (state is CartProductsLoading){
-              return const Center(
-                child: CircularProgressIndicator()
-              );
+            if (state is CartProductsLoading) {
+              return const Center(child: CircularProgressIndicator());
             }
             if (state is CartProductsLoaded) {
-              return state.products.isEmpty ? Center(child: _cartIsEmpty()) : Stack(
-                children: [
-                  _products(state.products),
-                   Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Checkout(products: state.products,)
-                  )
-                ],
-              );
+              return state.products.isEmpty
+                  ? Center(child: _cartIsEmpty())
+                  : Stack(
+                      children: [
+                        _products(state.products),
+                        Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Checkout(
+                              products: state.products,
+                            ))
+                      ],
+                    );
             }
             if (state is LoadCartProductsFailure) {
               return Center(
-                child: Text(
-                  state.errorMessage
-                ),
+                child: Text(state.errorMessage),
               );
             }
             return Container();
           },
-        ) ,
+        ),
       ),
     );
   }
 
   Widget _products(List<ProductOrderedEntity> products) {
     return ListView.separated(
-      padding: const EdgeInsets.all(16),
-      itemBuilder: (context, index) {
-        return ProductOrderedCard(
-          productOrderedEntity: products[index] ,
-        );
-      },
-      separatorBuilder: (context, index) => const SizedBox(height: 10,),
-      itemCount: products.length
-    );
+        padding: const EdgeInsets.all(16),
+        itemBuilder: (context, index) {
+          return ProductOrderedCard(
+            productOrderedEntity: products[index],
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(
+              height: 10,
+            ),
+        itemCount: products.length);
   }
 
   Widget _cartIsEmpty() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(
-          AppVectors.cartBag
+        SvgPicture.asset(AppVectors.cartBag),
+        const SizedBox(
+          height: 20,
         ),
-        const SizedBox(height: 20,),
         const Text(
           "Cart is empty",
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 20
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
         )
       ],
     );

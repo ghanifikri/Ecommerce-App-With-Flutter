@@ -8,13 +8,10 @@ class OrdersDisplayCubit extends Cubit<OrdersDisplayState> {
 
   void displayOrders() async {
     var returnedData = await sl<GetOrdersUseCase>().call();
-    returnedData.fold(
-      (error){
-        emit(LoadOrdersFailure(errorMessage: error));
-      }, 
-      (orders) {
-        emit(OrdersLoaded(orders: orders));
-      }
-    );
+    returnedData.fold((error) {
+      emit(LoadOrdersFailure(errorMessage: error));
+    }, (orders) {
+      emit(OrdersLoaded(orders: orders));
+    });
   }
 }

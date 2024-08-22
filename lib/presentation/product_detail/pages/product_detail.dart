@@ -19,10 +19,7 @@ import '../widgets/selected_size.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final ProductEntity productEntity;
-  const ProductDetailPage({
-    required this.productEntity,
-    super.key
-    });
+  const ProductDetailPage({required this.productEntity, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +29,60 @@ class ProductDetailPage extends StatelessWidget {
         BlocProvider(create: (context) => ProductColorSelectionCubit()),
         BlocProvider(create: (context) => ProductSizeSelectionCubit()),
         BlocProvider(create: (context) => ButtonStateCubit()),
-        BlocProvider(create: (context) => FavoriteIconCubit()..isFavorite(productEntity.productId))
+        BlocProvider(
+            create: (context) =>
+                FavoriteIconCubit()..isFavorite(productEntity.productId))
       ],
       child: Scaffold(
         appBar: BasicAppbar(
-          hideBack: false,  
+          hideBack: false,
           action: FavoriteButton(
             productEntity: productEntity,
           ),
-         ),
-          bottomNavigationBar: AddToBag(productEntity: productEntity,),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProductImages(productEntity: productEntity, ),
-                const SizedBox(height: 10, ),
-                ProductTitle(productEntity: productEntity, ),
-                const SizedBox(height: 10, ),
-                ProductPrice(productEntity: productEntity, ),
-                const SizedBox(height: 20, ),
-                SelectedSize(productEntity: productEntity, ),
-                const SizedBox(height: 15, ),
-                SelectedColor(productEntity: productEntity, ),
-                const SizedBox(height: 15, ),
-                ProductQuantity(productEntity: productEntity, ),
-              ],
-            ),
+        ),
+        bottomNavigationBar: AddToBag(
+          productEntity: productEntity,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProductImages(
+                productEntity: productEntity,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ProductTitle(
+                productEntity: productEntity,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ProductPrice(
+                productEntity: productEntity,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SelectedSize(
+                productEntity: productEntity,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              SelectedColor(
+                productEntity: productEntity,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              ProductQuantity(
+                productEntity: productEntity,
+              ),
+            ],
           ),
+        ),
       ),
     );
   }
